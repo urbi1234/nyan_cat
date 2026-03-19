@@ -36,11 +36,14 @@ while not ext:
     
     
     
-    
+    pop_seznam=[]
     
     for i in range(len(platforme)):
         if platforme[i][0] < -platforme[i][2]:
-            platforme.pop(i)
+            pop_seznam.append(i)
+    
+    for i in pop_seznam:
+        platforme.pop(i)
     
     for i in range(len(platforme)):
         platforme[i][0] -= 5
