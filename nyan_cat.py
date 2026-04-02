@@ -4,15 +4,22 @@ py.init()
 canvas = py.display.set_mode((500,500))
 py.display.set_caption('nyan_cat')
 
+white = (255,255,255)
+
 class Character:
     def __init__(self, x, y):
-        self.image = py.image.load('nyan_cat_firgure.png')
+        self.image = py.image.load('nyan_cat_firgure.png').convert_alpha()
+        self.image.set_colorkey(white)
+        self.size = (80, 50)
+        self.image = py.transform.scale(self.image, self.size)
         self.x = x
         self.y = y
 
     def draw(self):
         canvas.blit(self.image, (self.x, self.y))
 
+bg = py.image.load('ozadje.png')
+bg = py.transform.scale(bg, (500,500))
 
 color = (200,0,200)
 color1 = (0,0,200)
@@ -29,7 +36,7 @@ hitrost_gor = 0
 
 while not ext:
     clock.tick(30)
-    canvas.fill(color)
+    canvas.blit(bg, (0,0))
     for event in py.event.get():
         if event.type == py.QUIT:
             ext = True
