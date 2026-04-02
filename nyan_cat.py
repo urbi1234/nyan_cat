@@ -48,9 +48,12 @@ def nariši_platformo():
         if num == 5:
             nariši(500, 490, 200, 15)
         
-clock = py.time.Clock()
+
     
-    
+def nariši(x,y,w,h):
+    platforme.append([x, y, w, h])
+nariši(0, 250, 1000, 20)
+threading.Thread(target=nariši_platformo, daemon=True).start()
 
 
 x = 200
@@ -83,22 +86,6 @@ while not ext:
 
 
     player.draw()
-
-def nariši(x,y,w,h):
-    platforme.append([x, y, w, h])
-nariši(0, 250, 1000, 20)
-threading.Thread(target=nariši_platformo, daemon=True).start()
-while not ext:
-    clock.tick(30)
-    canvas.fill(color)
-    for event in py.event.get():
-        if event.type == py.QUIT:
-            ext = True
-    
-    
-    
-    
-    
     pop_seznam=[]
     
     for i in range(len(platforme)):
@@ -116,3 +103,12 @@ while not ext:
     točke = my_font.render(str(tocke), False, (31, 31, 31))
     canvas.blit(točke, (10,10))
     py.display.update()
+
+
+
+    
+    
+    
+    
+    
+    
