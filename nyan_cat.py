@@ -4,16 +4,26 @@ py.init()
 canvas = py.display.set_mode((500,500))
 py.display.set_caption('nyan_cat')
 
+class Character:
+    def __init__(self, x, y):
+        self.image = py.image.load('nyan_cat_firgure.png')
+        self.x = x
+        self.y = y
+
+    def draw(self):
+        canvas.blit(self.image, (self.x, self.y))
+
+
 color = (200,0,200)
 color1 = (0,0,200)
 ext = False
 
-x = 10
+x = 200
 y = 10
 
 clock = py.time.Clock()
-player = py.Rect(x,y,30,30)
-
+#player = py.Rect(x,y,30,30)
+player= Character(x,y)
 gravitacija = 3
 hitrost_gor = 0
 
@@ -37,6 +47,6 @@ while not ext:
         hitrost_gor -= 1
 
 
-    py.draw.rect(canvas, (10, 230, 180), player)
+    player.draw()
 
     py.display.update()
