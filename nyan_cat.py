@@ -6,12 +6,14 @@ py.display.set_caption('nyan_cat')
 
 white = (255,255,255)
 
+picture = py.image.load('nyan_cat_firgure.png').convert_alpha()
+size = (90, 50)
+picture = py.transform.scale(picture, size)
+
 class Character:
     def __init__(self, x, y):
-        self.image = py.image.load('nyan_cat_firgure.png').convert_alpha()
+        self.image = picture
         self.image.set_colorkey(white)
-        self.size = (80, 50)
-        self.image = py.transform.scale(self.image, self.size)
         self.x = x
         self.y = y
 
