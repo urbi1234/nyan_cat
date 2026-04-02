@@ -14,7 +14,7 @@ platforme = []
 def nariši_platformo():
     while not ext:
         time.sleep(random.randint(1,4))
-        nariši(500, random.randint(0,500), random.randint(20,500), 10)
+        nariši(500, random.randint(0,500), random.randint(20,500), 15)
         
 clock = py.time.Clock()
     
@@ -23,7 +23,7 @@ clock = py.time.Clock()
 
 def nariši(x,y,w,h):
     platforme.append([x, y, w, h])
-
+nariši(0, 250, 1000, 20)
 threading.Thread(target=nariši_platformo, daemon=True).start()
 while not ext:
     clock.tick(30)
