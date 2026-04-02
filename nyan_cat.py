@@ -11,7 +11,7 @@ white = (255,255,255)
 
 class Character:
     def __init__(self, x, y):
-        self.image = py.image.load('nyan_cat_firgure.png').convert_alpha()
+        self.image = py.image.load('nyan_cat_firgure-ozadje.png').convert_alpha()
         self.image.set_colorkey(white)
         self.size = (80, 50)
         self.image = py.transform.scale(self.image, self.size)
