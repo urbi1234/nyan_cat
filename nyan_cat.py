@@ -13,8 +13,18 @@ platforme = []
 
 def nariši_platformo():
     while not ext:
-        time.sleep(random.randint(1,4))
-        nariši(500, random.randint(0,500), random.randint(20,500), 15)
+        time.sleep(random.randint(1,2))
+        num = random.randint(1,5)
+        if num == 1:
+            nariši(500, 100, 200, 15)
+        if num == 2:
+            nariši(500, 200, 200, 15)
+        if num == 3:
+            nariši(500, 300, 200, 15)
+        if num == 4:
+            nariši(500, 400, 200, 15)
+        if num == 5:
+            nariši(500, 490, 200, 15)
         
 clock = py.time.Clock()
     
