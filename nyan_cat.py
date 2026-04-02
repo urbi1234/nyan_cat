@@ -7,9 +7,14 @@ py.init()
 canvas = py.display.set_mode((500,500))
 py.display.set_caption('nyan_cat')
 
+py.font.init()
+my_font = py.font.SysFont('Comic Sans MS', 30)
+
 color = (200,0,200)
 ext = False
 platforme = []
+
+tocke=0
 
 def nariši_platformo():
     while not ext:
@@ -57,9 +62,9 @@ while not ext:
     
     for i in range(len(platforme)):
         platforme[i][0] -= 5
-        py.draw.rect(canvas, (0,0,0), platforme[i])
+        py.draw.rect(canvas, (31, 31, 31), platforme[i])
         
         
-            
-    
+    točke = my_font.render(str(tocke), False, (31, 31, 31))
+    canvas.blit(točke, (10,10))
     py.display.update()
