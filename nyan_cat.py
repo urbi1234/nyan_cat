@@ -27,7 +27,7 @@ class Character:
         canvas.blit(self.image, (self.x, self.y))
     
     def get_rect(self):
-        return py.Rect(self.x, self.y, self.size[0], self.size[1])
+        return py.Rect(self.x, self.y, size[0], size[1])
 
 bg = py.image.load('ozadje.png')
 bg = py.transform.scale(bg, (500,500))
