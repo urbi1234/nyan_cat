@@ -3,6 +3,8 @@ import threading
 import random
 import time
 
+from pygame import Surface
+
 py.init()
 canvas = py.display.set_mode((500,500))
 py.display.set_caption('nyan_cat')
@@ -64,7 +66,7 @@ y = 10
 clock = py.time.Clock()
 #player = py.Rect(x,y,30,30)
 player= Character(x,y)
-gravitacija = 3
+gravitacija = 5 
 hitrost_gor = 0
 
 while not ext:
@@ -93,14 +95,25 @@ while not ext:
     for i in range(len(platforme)):
         if platforme[i][0] < -platforme[i][2]:
             pop_seznam.append(i)
-    
+
     for i in pop_seznam:
         platforme.pop(i)
     
     for i in range(len(platforme)):
         platforme[i][0] -= 5
         py.draw.rect(canvas, (31, 31, 31), platforme[i])
-        
+
+    dotik = False
+
+    for dx in range(90):  # širina mačke
+        if canvas.get_at((int(player.x + dx), int(player.y + 50)))[:3] == (31, 31, 31):
+            dotik = True
+            break
+
+    if dotik:
+        gravitacija = 0
+    else:
+        gravitacija = 5
         
     točke = my_font.render(str(tocke), False, (31, 31, 31))
     canvas.blit(točke, (10,10))
