@@ -48,12 +48,15 @@ def nariši_platformo():
         num = random.randint(1,5)
         if num == 1:
             nariši(500, 100, 200, 15)
+            nariši(500, 490, 200, 15)
         if num == 2:
             nariši(500, 200, 200, 15)
         if num == 3:
             nariši(500, 300, 200, 15)
+            nariši(500, 100, 200, 15)
         if num == 4:
             nariši(500, 400, 200, 15)
+            nariši(500, 200, 200, 15)
         if num == 5:
             nariši(500, 490, 200, 15)
         
@@ -101,6 +104,7 @@ while not ext:
 
     player.draw()
     pop_seznam=[]
+    pop_seznam_kov=[]
     
     for i in range(len(kovanci)):
         if player.get_rect().colliderect(py.Rect(kovanci[i])):
@@ -112,9 +116,19 @@ while not ext:
     for i in range(len(platforme)):
         if platforme[i][0] < -platforme[i][2]:
             pop_seznam.append(i)
-
-    for i in pop_seznam:
+            #print("izbrisano")
+    
+    for i in range(len(kovanci)):
+        if kovanci[i][0] < -10:
+            pop_seznam_kov.append(i)
+            
+    for i in pop_seznam[::-1]:
         platforme.pop(i)
+    
+    
+    for i in pop_seznam_kov[::-1]:
+        kovanci.pop(i)
+    
     
     for i in range(len(platforme)):
         platforme[i][0] -= 5
