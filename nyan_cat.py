@@ -10,6 +10,7 @@ canvas = py.display.set_mode((500,500))
 py.display.set_caption('nyan_cat')
 
 white = (255,255,255)
+kovanček = py.mixer.Sound("Kovanček.waw")
 
 picture = py.image.load('nyan_cat_firgure.png').convert_alpha()
 size = (90, 50)
@@ -24,6 +25,9 @@ class Character:
 
     def draw(self):
         canvas.blit(self.image, (self.x, self.y))
+    
+    def get_rect(self):
+        return py.Rect(self.x, self.y, self.size[0], self.size[1])
 
 bg = py.image.load('ozadje.png')
 bg = py.transform.scale(bg, (500,500))
@@ -34,6 +38,7 @@ color = (200,0,200)
 color1 = (0,0,200)
 ext = False
 platforme = []
+kovanci=[]
 
 tocke=0
 
@@ -56,6 +61,11 @@ def nariši_platformo():
     
 def nariši(x,y,w,h):
     platforme.append([x, y, w, h])
+    random_num = random.randint(1,2, 3)
+    if random_num == 1:
+        kovanci.append([600, y-20, 10, 10])
+    
+    
 nariši(0, 250, 1000, 20)
 threading.Thread(target=nariši_platformo, daemon=True).start()
 
@@ -92,6 +102,13 @@ while not ext:
     player.draw()
     pop_seznam=[]
     
+    for i in range(len(kovanci)):
+        if player.get_rect().colliderect(py.Rect(kovanci[i])):
+            tocke += 1
+            kovanček.play()
+            kovanci.pop(i)
+            break  # Da ne pride do napake zaradi spreminjanja seznama med iteracijo
+    
     for i in range(len(platforme)):
         if platforme[i][0] < -platforme[i][2]:
             pop_seznam.append(i)
@@ -114,6 +131,11 @@ while not ext:
         gravitacija = 0
     else:
         gravitacija = 5
+        
+    for i in range(len(kovanci)):
+        kovanci[i][0] -= 5
+        py.draw.rect(canvas, (255, 218, 65), kovanci[i])
+        
         
     točke = my_font.render(str(tocke), False, (31, 31, 31))
     canvas.blit(točke, (10,10))
