@@ -64,7 +64,7 @@ def nariši_platformo():
     
 def nariši(x,y,w,h):
     platforme.append([x, y, w, h])
-    random_num = random.randint(1,2, 3)
+    random_num = random.randint(1, 3)
     if random_num == 1:
         kovanci.append([600, y-20, 10, 10])
     
@@ -104,6 +104,7 @@ while not ext:
 
     player.draw()
     pop_seznam=[]
+    pop_seznam_kov=[]
     
     for i in range(len(kovanci)):
         if player.get_rect().colliderect(py.Rect(kovanci[i])):
@@ -115,9 +116,19 @@ while not ext:
     for i in range(len(platforme)):
         if platforme[i][0] < -platforme[i][2]:
             pop_seznam.append(i)
+            #print("izbrisano")
     
-    for i in pop_seznam:
+    for i in range(len(platforme)):
+        if kovanci[i][0] < -10:
+            pop_seznam_kov.append(i)
+            
+    for i in pop_seznam[::-1]:
         platforme.pop(i)
+    
+    
+    for i in pop_seznam_kov[::-1]:
+        kovanci.pop(i)
+    
     
     for i in range(len(platforme)):
         platforme[i][0] -= 5
