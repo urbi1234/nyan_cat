@@ -61,7 +61,7 @@ def nariši_platformo():
     
 def nariši(x,y,w,h):
     platforme.append([x, y, w, h])
-    random_num = random.randint(1,2, 3)
+    random_num = random.randint(1, 3)
     if random_num == 1:
         kovanci.append([600, y-20, 10, 10])
     
