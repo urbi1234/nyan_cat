@@ -3,23 +3,23 @@ import threading
 import random
 import time
 
+from pygame import Surface
+
 py.init()
 canvas = py.display.set_mode((500,500))
 py.display.set_caption('nyan_cat')
 
 white = (255,255,255)
+kovanček = py.mixer.Sound("kovanček.wav")
 
-
-kovanček=py.mixer.Sound('kovanček.wav')
-
-
+picture = py.image.load('nyan_cat_firgure.png').convert_alpha()
+size = (90, 50)
+picture = py.transform.scale(picture, size)
 
 class Character:
     def __init__(self, x, y):
-        self.image = py.image.load('nyan_cat_firgure-ozadje.png').convert_alpha()
+        self.image = picture
         self.image.set_colorkey(white)
-        self.size = (80, 50)
-        self.image = py.transform.scale(self.image, self.size)
         self.x = x
         self.y = y
 
@@ -27,7 +27,7 @@ class Character:
         canvas.blit(self.image, (self.x, self.y))
     
     def get_rect(self):
-        return py.Rect(self.x, self.y, self.size[0], self.size[1])
+        return py.Rect(self.x, self.y, size[0], size[1])
 
 bg = py.image.load('ozadje.png')
 bg = py.transform.scale(bg, (500,500))
@@ -79,7 +79,7 @@ y = 10
 clock = py.time.Clock()
 #player = py.Rect(x,y,30,30)
 player= Character(x,y)
-gravitacija = 3
+gravitacija = 5 
 hitrost_gor = 0
 
 while not ext:
@@ -118,7 +118,7 @@ while not ext:
             pop_seznam.append(i)
             #print("izbrisano")
     
-    for i in range(len(platforme)):
+    for i in range(len(kovanci)):
         if kovanci[i][0] < -10:
             pop_seznam_kov.append(i)
             
@@ -133,6 +133,18 @@ while not ext:
     for i in range(len(platforme)):
         platforme[i][0] -= 5
         py.draw.rect(canvas, (31, 31, 31), platforme[i])
+
+    dotik = False
+
+    for dx in range(90):  # širina mačke
+        if canvas.get_at((int(player.x + dx), int(player.y + 50)))[:3] == (31, 31, 31):
+            dotik = True
+            break
+
+    if dotik:
+        gravitacija = 0
+    else:
+        gravitacija = 5
         
     for i in range(len(kovanci)):
         kovanci[i][0] -= 5
