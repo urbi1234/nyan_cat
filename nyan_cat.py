@@ -10,7 +10,7 @@ py.display.set_caption('nyan_cat')
 white = (255,255,255)
 
 
-
+kovanček=py.mixer.Sound('kovanček.wav')
 
 
 
@@ -61,7 +61,7 @@ def nariši_platformo():
     
 def nariši(x,y,w,h):
     platforme.append([x, y, w, h])
-    random_num = random.randint(1,2)
+    random_num = random.randint(1,2, 3)
     if random_num == 1:
         kovanci.append([600, y-20, 10, 10])
     
@@ -105,6 +105,7 @@ while not ext:
     for i in range(len(kovanci)):
         if player.get_rect().colliderect(py.Rect(kovanci[i])):
             tocke += 1
+            kovanček.play()
             kovanci.pop(i)
             break  # Da ne pride do napake zaradi spreminjanja seznama med iteracijo
     
