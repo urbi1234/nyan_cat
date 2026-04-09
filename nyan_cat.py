@@ -10,7 +10,7 @@ canvas = py.display.set_mode((500,500))
 py.display.set_caption('nyan_cat')
 
 white = (255,255,255)
-kovanček = py.mixer.Sound("kovanček.waw")
+kovanček = py.mixer.Sound("kovanček.wav")
 
 picture = py.image.load('nyan_cat_firgure.png').convert_alpha()
 size = (90, 50)
